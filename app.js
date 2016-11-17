@@ -20,7 +20,7 @@ $(function() {
 
 
 function search() {
-	originalURL = "http://localhost:3000/";
+	originalURL = "https://aleitat.github.io/how-to-guide/";
 	$(".results-template").fadeOut(1000);
 		$(".results-template .col-lg-8").html("");
 		$(".results-template .col-lg-8").text("");
@@ -49,19 +49,6 @@ function search() {
 		});
 		req.send(null);
 }
-
-/*
-function refreshSearch() {
-	document.getElementById('button-refresh').addEventListener('click', function(event) {
-		event.preventDefault();
-		$("#searchInput").val("");
-		$(".results-template").fadeOut(1000);
-		$(".results-template .col-lg-8").text("");
-		
-	});
-}
-*/
-//refreshSearch();
 
 
 function showResults(results) {
