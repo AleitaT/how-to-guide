@@ -39,7 +39,7 @@ app.get('/', function(req, res, next){
 
 app.use(function (req, res, next) {   
         // required to send requests to site from another site    
-        res.setHeader('Access-Control-Allow-Origin', '//flip3.engr.oregonstate.edu:38866');  
+        res.setHeader('Access-Control-Allow-Origin', '//flip3.engr.oregonstate.edu:58866');  
         res.setHeader('Access-Control-Allow-Methods', 'GET');   
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');   
         res.setHeader('Access-Control-Allow-Credentials', false);  
