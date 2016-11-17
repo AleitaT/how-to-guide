@@ -20,7 +20,7 @@ $(function() {
 
 
 function search() {
-	originalURL = "https://aleitat.github.io/how-to-guide/";
+	originalURL = "//flip3.engr.oregonstate.edu:38866";
 	$(".results-template").fadeOut(1000);
 		$(".results-template .col-lg-8").html("");
 		$(".results-template .col-lg-8").text("");
