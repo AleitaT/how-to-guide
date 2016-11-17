@@ -3,63 +3,127 @@
     <head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link rel="icon" href="public/images/favicon.ico">
-		<meta name="description" content="How to Guide for BreweryDB API">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+        <meta name="description" content="How to Guide for BreweryDB API">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Welcome to the Brewery DB API tutorial!</title>
-        <h2>By Aleita Train</h2>
+        <link rel="icon" href=""> 
+      
 		
+        <title>Welcome to the Brewery DB API tutorial!</title>
+
 		<link href="" rel="stylesheet">
 		<link href="" rel="stylesheet">
     </head>
     
     <body>
-        <p>
-            Welcome to my guide to using Brewery DB's API!  
-        </p>
+    
+        <h1>Guide to using BreweryDB's API</h1>
+        <h2>by Aleita Train</h2>
+    
+	    
         <div class="#home">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="overview">OVERVIEW</a></li>
-					<li><a href="#connecting">CONNECTING TO THE API</a></li>
-					<li><a href="#code">THE CODE</a></li>
-					<li><a href="#endpoints">DATA & ENDPOINTS</a></li>
-					<li><a href="#demo">PUTTING IT ALL TOGETHER</a></li>
-				</ul>
+			<ul class="">
+				<li class="active"><a href="#overview">OVERVIEW</a></li>
+				<li><a href="#connecting">CONNECTING</a></li>
+				<li><a href="#code">CODE</a></li>
+				<li><a href="#endpoints">ENDPOINTS</a></li>
+				<li><a href="#demo">DEMO</a></li>
+			</ul>
 		</div>
 
-        <div class="#overview">
+        <div>
+       		 <p>
+                <h3 id="overview">Overview</h3>
+         	   BreweryDB is an API for accessing crowd-sourced data on breweries around the world!
+                This API is useful for sourcing data on your favorite beer, or creating 
+                helpful apps or websites for locating breweries, cideries, and meaderies near you!
+<br><br>
+                For a beginner, accessing an API can be moderately frustrating.  Be patient with 
+                yourself and don't hesitate to take a break end explore some of the following handy tools 
+                which I used during this tutotiral. 
+                 
+                <ul>
+                    <li><a href="https://nodejs.org/en/">node.js</a></li>
+                    <li><a href="http://getbootstrap.com">bootstrap</a></li>
+                    <li><a href="https://jquery.com">jquery</a></li>
+                    <li><a href="http://eloquentjavascript.net"> eloquent javascript</a></li>
+                    <li><a href="http://www.brewerydb.com">brewerDB developer guide<</a></li>
+      		  </p>
+        </div>
+
+        <div>
+         
+            <h3 id="connecting">Connecting</h3>
+            <p>
+          
+        </p>
         <p>
-            BreweryDB offers an extensive crowd sourced data base of information on breweries
-             one can use this data base to source information on breweries in their local area 
-            or for procuring details specific to beers they enjoy!  I like using it to track cideries
-            accross the U.S.! Now, let's begin!
+            <h3>Submitting a request</h3>
+                       Welcome to my guide to using Brewery DB's API!  
+
+       </p>
+       <p>
+            <h3>Proxy and server<h3>
         </p>
+        <p>
+           <h3> Crossing the Domain Boundaries</h3>
+		               Welcome to my guide to using Brewery DB's API!  
+
+        </p>
+       
         </div>
 
-        <div class="#connecting">
-         <p>
+        <div>
+            <p>
+            <h3 id="code">Code</h3>
             Welcome to my guide to using Brewery DB's API!  
         </p>
         </div>
 
-        <div class="#code">
-                 <p>
+        <div>
+                
+            <p>
+                <h3 id="endpoints">Endpoints</h3>
             Welcome to my guide to using Brewery DB's API!  
         </p>
         </div>
 
-        <div class="#endpoints">
-                 <p>
-            Welcome to my guide to using Brewery DB's API!  
+        <div>
+        <p>
+            <h3 id="demo">Demo</h3>
+            Try out the live demo!  This demo uses the 'locations' endpoints parameters.  
+           In order to use this parameter at the free level, I had to use at least one 
+           hard coded parameter.  I used the state of Oregon as the hard coded parameter. 
+           So you can enter in any city in Oregon, and if there are cider breweries near by, 
+           they will be displayed below! 
         </p>
         </div>
+        <p>
+        <div>
+        <form id="form" method="GET"> 
+            <input type="text" name="localityInput" id="localityInput" class="" placeholder="Enter a town in Oregon to see if there is a cider brewery near you">
+             <button  type="submit" name="citySubmit" id="citySubmit">Click here to discovery cideries near you!</button>
+             </form>
+        </div> 
 
-        <div class="#demo">
-                 <p>
-            Welcome to my guide to using Brewery DB's API!  
         </p>
-        </div>
-    
-    </body>
+        <div id="results-template">
+              <div class="container">
+                <section class="results-template container-fluid hidden">
+              <div class="col-lg-8 col-lg-offset-2"></div>
+                </section>
+        <p>
+            Don't see a cidery you were expecting?  Well then hop on over to 
+            BreweryDB.com and submit the information that is missing!  
+            Thank you for your time! 
+        </p>
+<script src="app.js"></script>  
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+</body>
 </html>
