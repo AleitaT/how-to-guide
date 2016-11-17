@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.set('port', 3000);
+app.set('port', 58866);
 app.use(express.static('public'));
 
 function processData(req) {    
@@ -39,7 +39,7 @@ app.get('/', function(req, res, next){
 
 app.use(function (req, res, next) {   
         // required to send requests to site from another site    
-        res.setHeader('Access-Control-Allow-Origin', 'https://aleitat.github.io/how-to-guide/');  
+        res.setHeader('Access-Control-Allow-Origin', '//flip3.engr.oregonstate.edu:38866');  
         res.setHeader('Access-Control-Allow-Methods', 'GET');   
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');   
         res.setHeader('Access-Control-Allow-Credentials', false);  
