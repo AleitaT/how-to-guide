@@ -20,7 +20,7 @@ $(function() {
 
 
 function search() {
-	originalURL = "//flip3.engr.oregonstate.edu:38866";
+	originalURL = "//flip3.engr.oregonstate.edu:58866";
 	$(".results-template").fadeOut(1000);
 		$(".results-template .col-lg-8").html("");
 		$(".results-template .col-lg-8").text("");
