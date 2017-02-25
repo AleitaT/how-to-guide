@@ -5,25 +5,22 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <meta name="description" content="How to Guide for BreweryDB API">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href=""> 
-      
 		
         <title>Welcome to the Brewery DB API tutorial!</title>
+
     </head>
     
     <body>
     
         <h1>Guide to using BreweryDB's API</h1>
         <h2>by Aleita Train</h2>
-    
 	    
         <div class="#home">
-			<ul class="">
-				<li class="active"><a href="#overview">OVERVIEW</a></li>
+			<ul class="sidenav">
+				<li><a href="#overview">OVERVIEW</a></li>
 				<li><a href="#connecting">CONNECTING</a></li>
 				<li><a href="#code">CODE</a></li>
 				<li><a href="#endpoints">ENDPOINTS</a></li>
@@ -31,95 +28,350 @@
 			</ul>
 		</div>
 
-        <div>
-       		 <p>
-                <h3 id="overview">Overview</h3>
+        <div id="overview">
+        <h3>Overview</h3>
+                <div class="paragraph">
+                <p>
          	   BreweryDB is an API for accessing crowd-sourced data on breweries around the world!
                 This API is useful for sourcing data on your favorite beer, or creating 
                 helpful apps or websites for locating breweries, cideries, and meaderies near you!
-<br><br>
+                <br><br>
                 For a beginner, accessing an API can be moderately frustrating.  Be patient with 
                 yourself and don't hesitate to take a break end explore some of the following handy tools 
-                which I used during this tutotiral. 
-                 
-                <ul>
+                which I used during this tutorial. 
+
+                </p>
+                </div>
+                <div>
+                <ul class="sidenav">
+                    <li><a href="http://www.brewerydb.com">breweryDB</a></li>
                     <li><a href="https://nodejs.org/en/">node.js</a></li>
                     <li><a href="http://getbootstrap.com">bootstrap</a></li>
                     <li><a href="https://jquery.com">jquery</a></li>
-                    <li><a href="http://eloquentjavascript.net"> eloquent javascript</a></li>
-                    <li><a href="http://www.brewerydb.com">brewerDB developer guide<</a></li>
-      		  </p>
+                    <li><a href="http://eloquentjavascript.net">javascript</a></li>
+                   
+                </ul>
+                </div>
+      		  
         </div>
+        <div><p>
+         <hr>
+            <h3 id="connecting">API</h3>
+            </p><p>
+          Let's jump right in and head to the <a href="http://www.brewerydb.com/developers">brewerDB website</a>! Navigate to 
+          the developers section and register for access to the API.  You'll register your email and name in exchange for 
+          access to up to 2 API's for free.  <br><br>          
+          Of course, the free package is limited in requests and formatting -- but it's more than enough to get you started!<br>
+          <br>
+          Once you have your API key in hand, we are ready to roll! <br>
+                      <br>
+            <hr>
+            <h3>Making a request</h3>
+            A basic request will look something like this: <br><br>
+             <div class = "exampleCode">
+                 https://api.brewerydb.com/v2/<b>typeofquery</b>?key=<b>1234567</b>&amp;<b>endpoint</b>=<b>value</b>&amp;<b>endpoint</b>=<b>value</b>
+            </div>
+            <br>
+            <b>Let's look at the parts above</b><br><br>
+            <b>key</b> = your API key <br>
+            <br><b>typeofquery:</b> BreweryDB offers a number of different options for queries.  
+            There is everything from beer, locality, ingredients and much more.  You
+            can read more about the different options on breweryDB.  I'm going to focus on
+            locality.<br>
+            <br><b>endpoint</b> = brewerydb offers a number of 'endpoints' for each tyoe of
+            query.  You can find out on breweryDB the list of endpoint options. When 
+            using the location search option we have endpoints like 'zip', 'locality'
+            'region' etc.<br>
+            <br><b>value</b>= The value represents data from the user, which you append 
+            to this link in order to parse out the correct information.  This would be 
+            "Oregon", "Portland", or "97403" respectively. <br><br>
 
-        <div>
-         
-            <h3 id="connecting">Connecting</h3>
-            <p>
-          
-        </p>
-        <p>
-            <h3>Submitting a request</h3>
-                       Welcome to my guide to using Brewery DB's API!  
-
+            <b>Here is an exmaples of a basic search request using location endpoints</b> <br>
+             <br><div class = "exampleCode">
+            https://api.brewerydb.com/v2/location?key=1234567&amp;region=oregon&amp;locality=eugene
+            </div>
        </p>
+
+<hr>
        <p>
-            <h3>Proxy and server<h3>
+            <h3>Handling your key</h3>
+            <div class ="paragraph">
+                Because we should share our API key secretly, it is preferred to set up a proxy/server .js file. 
+              This is basically just a .js file that we will use some express on to launch the page which 
+              act as our server. We will use this server to handle requests which we will use to more safely communicate with the API database. The file will act as a middleman to 
+                our webpage and the server we are requesting data from. This isn't required, but I found I liked the set up better 
+                knowing it was a practical application. <br><br>
+                Since we are using express in our module, launching a server would require the following in the serverfile.js (you can call it whatever you want)<br>
+                   <br><div class = "exampleCode">
+<br>var express = require('express')
+<br>var app = express()            
+
+</div>
+<p><br>
+    Additionally we would require the following elements in the head of our server file:<br>
+    <br>
+<div class = "exampleCode">
+<br>var request = require('request');  // for pulling requests
+<br>var bodyParser = require('body-parser');   // for handling json objects (standard for breweryDB)
+<br>app.use(bodyParser.json()); // also for pulling requests
+<br>app.set('port', 3000);  // standard port number for listening for requests from our app
+</div>
+    
+                <br>You will need to add a header to your response objects in express.<br>
+                <br>If you are receiving browser erros along the lines of cross domain request error, or 'no access-control-allow...' take a minute to 
+                check out some web info on these events.  There are many articles explaining the reason
+                and technical specifications of how to make your app be squared up with web protocol 
+                standards. I like <a href="http://john.sh/blog/2011/6/30/cross-domain-ajax-expressjs-and-access-control-allow-origin.html">This article</a>.<br> 
+                <br>
+                <br>
+                Here is an example header that you can use to get started<br><br>
+            </div>
+                <div class = "exampleCode">
+                app.use(function (req, res, next) { 
+                <br>res.setHeader('Access-Control-Allow-Origin', 'yoursiteurl');
+                <br>res.setHeader('Access-Control-Allow-Methods', 'GET');
+                <br>res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+                <br>res.setHeader('Access-Control-Allow-Credentials', false);
+                <br>next();
+                <br>});	
+                </div>
+                <div class="paragraph"><br>
+                What is happening here?  We are sending a basic website request, and sending 
+                a header along with it.  This tells the website we are requesting 
+                data, whom is making the request (so it can pair it up with where it is going). This also tells the database that we  want to collect data (get request), if we were using the API
+                to submit data to breweryDB we would change this to "Post" or "put" depending on 
+                what kind of send we were doing. Credentials is set to 'false' becasue we don't need to track cookies for any of our current practice examples. 
+                <br><br>
+	If during testing you experience errors in which the address making the request and the header address don't match up - you might need to 
+    double check to make sure everything here is correct.  Are you addressing the right server file in the header? 
+    Are you supplying the method correctly?  Get? Put? Post? Do you need to track cookies? If you move your site around during testing, this will need to be updated to reflect the server location. <br>
+
+                </div>
         </p>
+        <hr>
         <p>
-           <h3> Crossing the Domain Boundaries</h3>
-		               Welcome to my guide to using Brewery DB's API!  
+           <h3> Time for our main get request!  </h3><br>
+Your get method has a few important parts, and lot's of important code - this is the guts of your api call! If this doesn't go right, you can't 
+have a fun time doing much else! <br><br>
+First pay attention to the information immediately after the first paren.  This is where you will state the page 
+you wish for this to load on - / - refernces your home page, but you may want to change this for testing. The next part is our function call. 
+We will be using a request, a response, and a next - whch let's us move on to the next part of the server file. 
+Inside of this we are calling a variable which refers to a function which is providing our input for completing the api call. 
+The request is sending our api key along with endpoints and parameters to the brewerydb and returning to our console the guts of this json object.
+Use the console log to ensure your data is being parsed correctly.  Spend extra time here if confused. 
+ <br> 
+ <br>
+ Example of get request for touching breweryDB<br><br>
+ <div class = "exampleCode">
+   </p>app.get('/', cors(), function(req, res, next){    
+  <br>var localityInput = processData(req);   
+  <br>request("https://api.brewerydb.com/v2/locations?key=4daf32489a8f98a5db97e45f569d8261&amp;locationType=Cidery&amp;region=Oregon&amp;locality=" + localityInput.qParams[0].value, 
+  <br>function (error, response, body) {       
+    <br>if (!error && response.statusCode === 200) {        	
+    <br>console.log(body);        	
+   <br> res.send(body);      	
+<br>  }     
+<br>});  
+<br>});
+</div>
+<br>  
 
-        </p>
-       
-        </div>
+<br>Lastly, you'll want to make sure you set your server to listen to the same port you set it to 
+<br>
+<div class = "exampleCode">
 
-        <div>
+<br>app.set('port', 58866); 
+   
+ <br>app.listen(app.get('port'), function(){   
+     <br>   console.log('Express started on port ' + app.get('port') + '; press Ctrl-C to terminate.'); 
+<br>});      
+</div>
+        
+<hr><div>
             <p>
-            <h3 id="code">Code</h3>
-            Welcome to my guide to using Brewery DB's API!  
-        </p>
+            <h3 id="code">API Code - JSON OBJECT</h3>
+Let's look at some example return calls.  The below are json objects that should be returned if the API calls are made appropriately.  I'll give 
+two different examples to give you an idea of how differently these can be -- but how they are all an exact model for parsing data from the brewerydb database.<br>            </p>
         </div>
+<hr>
+        <div>  
+  <p>
+               <h3 id="endpoints">Endpoints - How to ask for what? </h3>
+                Endpoints are how we tell brewery db what kind of information we are trying to sort. 
+	For examples we could search beers -- type of -- abv 
+or we could search locations -- by region -- and city -- and even type of brewery (cidery, meadery, etc) 
+or we could search   XXX
 
-        <div>
-                
+In any instance, there is extensive explanations on line for how these are parsed out. Once you get a jason object pulled from the site, you will be able to clearly see the naming convention for how you should call them.  
+Here is an example of a query result from a location call. 
+
+<br><br>
+<div class = "exampleCode">
+    <br>
+{
+ "status" : "success",<br> 
+  "data" : {<br> 
+    "status" : "verified",<br> 
+    "statusDisplay" : "Verified",<br> 
+    "locationTypeDisplay" : "Micro Brewery",<br> 
+    "updateDate" : "2012-03-21 14:11:15",<br> 
+    "region" : "Kansas",<br> 
+    "latitude" : 39.3168103,<br> 
+    "inPlanning" : "N",<br> 
+    "name" : "Main Brewery",<br> 
+    "id" : "d25euF",<br> 
+    "openToPublic" : "Y",<br> 
+    "isClosed" : "N",<br> 
+    "website" : "http://www.thehighnoon.com/",<br> 
+    "longitude" : -94.9107882,<br> 
+    "phone" : "913-682-4876",<br> 
+    "locationType" : "micro",<br> 
+    "postalCode" : "66048",<br> 
+    "brewery" : {<br> 
+      "isOrganic" : "N",<br> 
+      "website" : "http://www.thehighnoon.com/",<br> 
+      "status" : "verified",<br> 
+      "id" : "gbhf9E",<br> 
+      "updateDate" : "2012-03-21 14:10:53",<br> 
+      "description" : "During the late 1800âs our building ...",<br> 
+      "statusDisplay" : "Verified",<br> 
+      "name" : "High Noon Saloon & Brewery",<br> 
+      "createDate" : "2012-03-21 10:36:31"<br> 
+    },<br> 
+    "isPrimary" : "Y",<br> 
+    "countryIsoCode" : "US",<br> 
+    "createDate" : "2012-03-21 10:36:31",<br> 
+    "breweryId" : "gbhf9E",<br> 
+    "locality" : "Leavenworth",<br> 
+    "streetAddress" : "206 Choctaw St"<br> 
+  },<br> 
+  "message" : "Request Successful"<br> 
+}<br><br> 
+</div><br> 
+<br>
+Here is another example from the endpoints I used.  This is showing one result for a search query of "eugene".  You'll notice that at the end of the query 
+it says 'status: success', this will log even if there are no results - so long as it passed correctly.  This is good to know in case
+you do a search that results in no returns -- check for this message in the console to see if you made the request appropriately -- there aren't 
+a whole lot of cideries out there! <br>
+            </p>
+        </div>
+<div class = "exampleCode">
             <p>
-                <h3 id="endpoints">Endpoints</h3>
-            Welcome to my guide to using Brewery DB's API!  
-        </p>
-        </div>
-
+      {"currentPage":1,
+      <br>"numberOfPages":1,
+      <br>"totalResults":1,
+      <br>"data":[
+      <br>{"id":"Uwe8ZL",
+      <br>"name": "Main Brewery",
+      <br>"streetAddress":"390 Lincoln St.",
+      <br>"locality":"Eugene",
+      <br>"region":"Oregon",
+      <br>"postalCode":"97401",
+      <br>"hoursOfOperation":"Tue: 4:00pm - 10:00pm\nWed: 4:00pm - 10:00pm\nThu: 4:00pm - 10:00pm\nFri: 3:00pm - 11:00pm\nSat: 3:00pm - 11:00pm\n\nFamily friendly until 9pm","latitude":44.0556022,"longitude":-123.097306,"isPrimary":
+      <br>"Y",
+      <br>"inPlanning":"N",
+      <br>"isClosed":"N",
+      <br>"openToPublic":"Y",
+      <br>"locationType":"cidery",
+      <br>"locationTypeDisplay":"Cidery",
+      <br>"countryIsoCode":"US",
+      <br>"status":"update_pending",
+      <br>"statusDisplay":"Update Pending",
+      <br>"createDate":"2016-11-10 19:16:57",
+      <br>"updateDate":"2016-11-19 06:54:32",
+      <br>"breweryId":"9i5SFC",
+      <br>"brewery":{"id":"9i5SFC",
+      <br>"name":"WildCraft Cider Works",
+      <br>"nameShortDisplay":"WildCraft Cider Works",
+      <br>"description":"Natural and wild fermented cider from the Pacific North West. Low sugar + wild yeast.",
+      <br>"website":"http:\/\/www.wildcraftciderworks.com",
+      <br>"established":"2013","isOrganic":"N",
+      <br>"status":"update_pending",
+      <br>"statusDisplay":"Update Pending",
+      <br>"createDate":"2016-10-24 01:59:14",
+      <br>"updateDate":"2016-11-19 06:50:11"},
+      <br>"country":
+      <br>{"isoCode":"US",
+      <br>"name":"UNITED STATES",
+      <br>"displayName":"United States",
+      <br>"isoThree":"USA",
+      <br>"numberCode":840,
+      <br>"createDate":"2012-01-03 02:41:33"}}],
+      <br>"status":"success"
+      <br>}
+            </p>
+</div>
+<div>
+Finally, you will just need to make a call from your client side app requesting a json object
+of data dependant on what their input is.  You will need to use basic html to capture their
+input upon event, but then you can use a version of the following code to do the grunt of sending 
+this request to the server. 
+    </div>
+<div class = "exampleCode">
+    var req = new XMLHttpRequest();
+		<br>req.open("GET", uri, true);
+</div>
+<br><div>
+This is essentialy creating a new variable XMLHttpRequest that you will then use to parse a uri, which is just 
+your original web link + endpoint in the form of ?endpoint= + input variable.  This is your uri, or 
+new link, or pointer link, or payloud, whatever you want to call it.  After this, you 
+are on the track to parse out json object values and format the response!  hip hip hoooray!
+</div>
+<div>
+In the final step of your api project you will want to create variables which represent certain
+parts of this json object. Below is an example of how you might reach this data.<br>
+<div class="exampleCode">
+                var name = item.brewery.name;<br>
+				var website = item.brewery.website;<br>
+				var phone = "";<br>
+				var address = item.streetAddress;<br>
+..... // create a variable to display combined outputs. <br>
+					var formatOutput += name + website + phone + address		<br>					
+    </div>
+    </div>
+<hr>
         <div>
         <p>
-            <h3 id="demo">Demo</h3>
+            <h3 id="demo">Let's explore cideries in Oregon!</h3><br><div>
             Try out the live demo!  This demo uses the 'locations' endpoints parameters.  
            In order to use this parameter at the free level, I had to use at least one 
            hard coded parameter.  I used the state of Oregon as the hard coded parameter. 
            So you can enter in any city in Oregon, and if there are cider breweries near by, 
            they will be displayed below! 
+
+           <br><br>
+           I sugged trying out "portland" since there aren't a lot of cideries in the database 
+           elsewhere in the state just yet!<br><br>
         </p>
         </div>
+        <div>
+
+
         <p>
         <div>
         <form id="form" method="GET"> 
             <input type="text" name="localityInput" id="localityInput" class="" placeholder="Enter a town in Oregon to see if there is a cider brewery near you">
-             <button  type="submit" name="citySubmit" id="citySubmit">Click here to discovery cideries near you!</button>
-             </form>
+             <button  type="submit" id="citySubmit">Click here to discovery cideries near you!</button>
+        </form>
         </div> 
-
         </p>
+
         <div id="results-template">
               <div class="container">
                 <section class="results-template container-fluid hidden">
-              <div class="col-lg-8 col-lg-offset-2"></div>
+                    <div class="col-lg-8 col-lg-offset-2"></div>
                 </section>
-        <p>
+              </div>
+       </div>
+
+        <h3>
             Don't see a cidery you were expecting?  Well then hop on over to 
             BreweryDB.com and submit the information that is missing!  
             Thank you for your time! 
-        </p>
-<script src="app.js"></script>  
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+        </h3>
+        <foot>This website made using javascript, node.js, express, bootstrap, and jquery for parsing data.
+            </footer>
+<script src="app.js"></script>   
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 </html>
