@@ -2,48 +2,46 @@ function bindButton() {
 	document.getElementById('citySubmit').addEventListener('click', function(event) {
 		event.preventDefault();
 		console.log(citySubmit);
-		search();
+		findCideries();
 	});
 }
-
 bindButton();
-
 $(function() {
 	$('#citySubmit').keypress(function(event){ 
 		var keyCode = event.which;   
 		if (keyCode == 13) {
 			event.preventDefault();
-			search();
+			findCideries();
 		}
 	});
 });
-
-
-function search() {
-	originalURL = "//flip3.engr.oregonstate.edu:58866";
+function findCideries() {
+	origin = "http://35.161.194.111:3000/";	
 	$(".results-template").fadeOut(1000);
 		$(".results-template .col-lg-8").html("");
 		$(".results-template .col-lg-8").text("");
-		
 		var searchInput = document.getElementById('localityInput').value;
-		var cityToSubmit = "?locality=" + searchInput;
-		var newURL = originalURL + cityToSubmit;
-		console.log(newURL);
+		var uri = origin + "?locality=" + searchInput;
+		console.log(uri);
 		var req = new XMLHttpRequest();
-		req.open("get", newURL, true);
+		req.open("GET", uri, true);
+		//reg.send(null);
 		req.addEventListener('load', function() {
 			if(req.status < 400) {
+				console.log(req);
+				console.log(origin);
+				console.log(uri);
+				//console.log(body)
 				var response = JSON.parse(req.responseText);
 				var numberOfResults = response.totalResults;
 				console.log(numberOfResults);
-				showResults(response);		
-
+				displayCideries(response);		
 			$("#search-result").text("Search results for: " + searchInput);
-			console.log("city is:", localityInput);
-			console.log("city is:", localityInput);
-
-				
-			} else {
+//			console.log("city is:", localityInput);
+//			console.log("city is:", localityInput);
+			} 
+			else 
+			{
 				console.log("Error in network request: " + req.statusText);
 			}
 		});
@@ -51,28 +49,30 @@ function search() {
 }
 
 
-function showResults(results) {
+
+function displayCideries(results) {
 	$.each(results.data, function(index, item) {
 		try{
 			var template = "";
-			
-				var name = item.brewery.name;
-				var website = item.brewery.website;
-				var phone = "";
-				var address = item.streetAddress;
+				//parameters to display 
+				var name = item.brewery.name; // all have brewery name
+				var website = ""; // most have website. 
+				var phone = ""; // some don't have phones listed yet
+				var address = ""; // some have no details listed! 
 				if(item.phone != undefined) {
-					phone = item.phone;
-				
-				
-				template += '<div class="results-template"><dl>' +
-							'<dt class="name">Cidery name: </br>'+ name +'</dt>' +
-							'<dd>Website: </br>' + website + '</dd>' +
-							'<dd>Phone Number: </br>' + phone + '</dd>' +
+					phone = item.phone;}
+				if(item.website != undefined) {
+					website = item.brewery.website;}
+				if(item.streetAddress != undefined) {
+					address = item.streetAddress;}
+					template += '<div class="results-template"><dl>' +
+							'<dt class="name"></br>'+ name +'</dt>' +
+							'<dd><b>Website:</b> </br>' + website + '</dd>' +
+							'<dd><b>Phone:</b> </br>' + phone + '</dd>' +
 
-							'<dd>Address: </br>' + address + '</dd>' +
+							'<dd><b>Address:</b> </br>' + address + '</dd>' +
 							'</dl></div>';
-			}			
-			
+			//}					
 			$(".results-template").removeClass("hidden").fadeIn(500);
 			$(".results-template .col-lg-8").append(template);
 			} catch(error) {
