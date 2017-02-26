@@ -1,20 +1,8 @@
-html {
-    font-family: sans-serif;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 80%
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup,
-main, menu, nav, section, summary {
+details, header,main, menu, nav, section {
     display: block
 }
 body.p{
     font-size: 14px;
-}
-
-h1 {
-    margin: .67em 0;
-    font-size: 2em
 }
 
 body {
@@ -22,67 +10,111 @@ body {
     margin: 10px;
 }
 
+/*******headers********/
 h1 {
+    margin: .67em 0;
+    font-size: 2em;
     color: lightcoral;
     text-align: center;
+    padding: 10px;
 }
 
 h2 {
     color: red;
     text-align: center;
+    padding: 10px;
+}
+h3 {
+    color: red;
+    text-align: left;
+    padding-top: 20px;
+
+
 }
 
-p {
-    font-family: verdana;
-    font-size: 20px;
-}
+/*********** DIV ***********/
 
-
-div. {
-    max-width: 500px;
+div {
+    max-width: 100%;
     margin: auto;
-    border: 3px solid lightcoral;
-}
-button{
-    width: 100%
+    padding: 10px;
 }
 
-input{
-    width: 100%;
+div.exampleCode{
+    border-radius: 15px 15px 15px 15px;
+    background: lightgray;
+    padding: 20px;     
+    font-size-adjust: .60;
+   word-wrap: break-word;
+
+}
+div.exampleCode p{
+    background: lightgray;
+    padding-right: 20px;     
+    font-size-adjust: .60;
 }
 
-/* Top Navigation */
-ul {
+div.paragraph {
+    max-width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+
+
+
+/**************** Top Navigation ***************/
+
+ul.sidenav {
     list-style-type: none;
     margin: 0;
     padding: 0;
     width: 100%;
     background-color: #f1f1f1;
+    position: relative;
+    height: auto;
+    overflow: auto;
 }
 
-
-li a {
+ul.sidenav li a {
     display: block;
     color: #000;
     padding: 8px 16px;
     text-decoration: none;
 }
-
-li a:hover {
-    background-color: #555;
-    color: white;
-}
-
-.active {
+ 
+ul.sidenav li a.active {
     background-color: #4CAF50;
     color: white;
 }
 
-li {
-    display: inline;
-    text-align: center;
+ul.sidenav li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
 }
 
-div.#overview{
-   
+div.content {
+    margin-left: 25%;
+    padding: 1px 16px;
+    height: 1000px;
 }
+
+@media screen and (max-width: 1050px){
+    ul.sidenav {
+        width:100%;
+        height:auto;
+        position:relative;
+    }
+    ul.sidenav li a {
+        float: left;
+        padding: 15px;
+    }
+    div.content {margin-left:0;}}
+
+    @media screen and (max-width: 400px){
+    ul.sidenav li a {
+        text-align: center;
+        float: none;
+    }
+
+
+/*************** BUTTON AND SUBMIT **************/
